@@ -1,0 +1,70 @@
+body{
+    background: linear-gradient(90deg,#9CA3AF, #D1D5DB);	
+    margin-top:20px;
+}
+
+.widget-26 {
+  color: #3c4142;
+  font-weight: 400;
+}
+
+.widget-26 tr:first-child td {
+  border: 0;
+}
+.widget-26 .widget-26-job-emp-img img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+.widget-26 .widget-26-job-title {
+  min-width: 200px;
+}
+.widget-26 .widget-26-job-title a {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #3c4142;
+  line-height: 1.5;
+}
+.widget-26-job-emp-img{
+    margin-left: 100px;
+    margin-top:5px;
+}
+.widget-26 .widget-26-job-title a:hover {
+  color: #68CBD7;
+  text-decoration: none;
+}
+.widget-26 .widget-26-job-title .employer-name {
+  margin: 0;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #3c4142;
+  font-size: 0.8125rem;
+  color: #3c4142;
+}
+.widget-26 .widget-26-job-title .employer-name:hover {
+  color: #68CBD7;
+  text-decoration: none;
+}
+.widget-26-job-category button + button {
+    margin-left: 10px;
+  }
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .search-body .search-filters {
+    display: flex;
+  }
+  .search-body .search-filters .filter-list {
+    margin-right: 1rem;
+  }
+}
+@media (min-width: 992px){
+.col-lg-2 {
+    flex: 0 0 16.66667%;
+    max-width: 16.66667%;
+}
+}
+.text-center{
+    margin: 20px;
+}
+.widget-26-job-title span{
+    font-size:smaller;
+}

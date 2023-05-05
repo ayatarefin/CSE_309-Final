@@ -1,0 +1,160 @@
+/* Skill Section */
+
+*{
+  font: @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+}
+
+#skill{
+    background-color:white;
+    padding: 5% 5%;
+    position: relative;
+    margin-bottom: 20px;
+}
+#skill::after{
+    content: '';
+    width: 30%;
+    height: 1px;
+    background-color: #36aec6;
+    position: absolute;
+    bottom: 0;
+    left: 35%;
+}
+#skill .skill-col{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 50px;
+    margin-top: 70px;
+}
+#skill .skill-col .skill-item .skill-name-per{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#skill .skill-col .skill-item .skill-name-per h2{
+    color: #23313c;
+    /* font-family: Georgia, 'Times New Roman', Times, serif; */
+    font-weight: 700;
+    font-size: 19px;
+}
+#skill .skill-col .skill-item .skill-outer-bar{
+    width: 100%;
+    height: 8px;
+    background-color: rgb(225, 227, 228);
+    margin-top: 10px ;
+}
+#skill .skill-col .skill-item .skill-outer-bar .skill-inner-bar-1{
+    height: 8px;
+    background-color: transparent;
+    animation: percent_reveal_1 10s infinite forwards;
+    animation-duration: 15s;
+}
+#skill .skill-col .skill-item .skill-outer-bar .skill-inner-bar-2{
+    height: 8px;
+    background-color: transparent;
+    animation: percent_reveal_2 10s infinite forwards;
+    animation-duration: 15s;
+}
+#skill .skill-col .skill-item .skill-outer-bar .skill-inner-bar-3{
+    height: 8px;
+    background-color: transparent;
+    animation: percent_reveal_3 10s infinite forwards;
+    animation-duration: 15s;
+}
+#skill .skill-col .skill-item .skill-outer-bar .skill-inner-bar-4{
+    height: 8px;
+    background-color: transparent;
+    animation: percent_reveal_4 10s infinite forwards;
+    animation-duration: 15s;
+}
+#skill .skill-col .skill-item .skill-outer-bar .skill-inner-bar-5{
+    height: 8px;
+    background-color: transparent;
+    animation: percent_reveal_5 10s infinite forwards;
+    animation-duration: 15s;
+}
+#skill .skill-col .skill-item .skill-outer-bar .skill-inner-bar-6{
+    height: 8px;
+    background-color: transparent;
+    animation: percent_reveal_6 10s infinite forwards;
+    animation-duration: 15s;
+}
+@keyframes percent_reveal_1 {
+    0%
+    {
+        width: 0%;
+        background-color: #5168ff;
+    }
+    
+    100%{
+        width:85%;
+        background-color: #5168ff;
+    }
+}
+@keyframes percent_reveal_2 {
+    0%
+    {
+        width: 0%;
+        background-color: #5168ff;
+    }
+    100%{
+        width:70%;
+        background-color: #5168ff;
+    }
+}
+@keyframes percent_reveal_3 {
+    0%
+    {
+        width: 0%;
+        background-color: #5168ff;
+    }
+    100%{
+        width:50%;
+        background-color: #5168ff;
+    }
+}
+@keyframes percent_reveal_4 {
+    0%
+    {
+        width: 0%;
+        background-color: #5168ff;
+    }
+    
+    100%{
+        width:80%;
+        background-color: #5168ff;
+    }
+}
+@keyframes percent_reveal_5 {
+    0%
+    {
+        width: 0%;
+        background-color: #5168ff;
+    }
+    100%{
+        width:45%;
+        background-color: #5168ff;
+    }
+    
+}
+@keyframes percent_reveal_6 {
+    0%
+    {
+        width: 0%;
+        background-color: #5168ff;
+    }
+    100%{
+        width:75%;
+        background-color: #5168ff;
+    }
+}
+.relative:focus-within .absolute {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+@media only screen and (max-width: 760px){
+    #skill .skill-col{
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 30px;
+    }
+}

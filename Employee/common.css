@@ -1,0 +1,31 @@
+.common{
+    /* margin-top: 10em; */
+    margin-left: 16em;
+}
+
+.common2{
+    margin-left: 11em;
+}
+.common3{
+    margin-left: 50em;
+}
+
+.common4{
+    margin-left: 14em;
+}
+
+h1{
+    font-size: xx-large;
+}
+
+.hoverr:hover{
+    /* background-color: #E3F2FD; */
+    background: #E3F2FD;
+    -webkit-transition: background 2s;
+    animation: background 2s  ;
+}
+
+.photo{
+    width: 30px;
+    height: 30px;
+}

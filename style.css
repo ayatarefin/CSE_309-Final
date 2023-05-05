@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Alkatra&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Alkatra', cursive;
+}
+
+body {
+    background-image: url(Pictures/login.jpg);
+    background-position: center;
+    background-size: contain;
+    min-height: 100vh;
+}
+
+.form{
+    width: 300px;
+    height: 330px;
+    color: #fff;
+    background: #1b263b;
+    opacity: 0.98;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 40px 25px;
+    border-radius: 10px;
+    box-shadow: 5px 20px 50px #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+label {
+  display: flex;
+  margin: 10px 20px;
+  
+}
+
+.form input[type="checkbox"]
+{
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin-left: 15px;
+  margin-top: 0px;
+  vertical-align: top;
+  position: relative;
+
+}
+
+.form input[type="checkbox"]:hover
+{
+  cursor: pointer;
+
+}
+
+.form input{
+	width: 80%;
+	height: 20px;
+	background: #e0dede;
+	justify-content: center;
+	margin: 10px auto;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+}
+
+.form input[type="submit"]
+{
+    width: 60%;
+    border: none;
+    height: 40px;
+    color: #fff;
+    background: #778DA9;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 15px;
+}
+
+.form input[type="submit"]:hover{
+    cursor: pointer;
+    background: #34425c;
+    color: #fff;
+    font-weight: bold;
+}
+  
+  form h1 {
+    text-align: center;
+    font-size: 25px;
+    color: #ffffff;
+    margin-bottom: 30px;
+  }
+  
+  p {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 14px;
+  }
+  p a{
+    color: #778DA9;
+  }
+  .para-2 {
+    text-align: center;
+    color: white;
+    font-size: 15px;
+  }
+  .para-2 a {
+    color: #778DA9;
+  }
+
+  button{
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    justify-content: center;
+    display: block;
+    color: #fff;
+    background: #778DA9;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: .2s ease-in;
+    cursor: pointer;
+  }
+  button:hover{
+    background: #34425c;
+  }
+  
+  .dropdown {
+	position: relative;
+	display: inline-block;
+	display: flex;
+	justify-content: center;
+  }
+  
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #778DA9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+  
+  .dropdown-content a {
+	color: white;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #34425c}
+  
+  .dropdown:hover .dropdown-content {
+	display: block;
+  }
