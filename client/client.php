@@ -1,3 +1,23 @@
+<?php
+session_start();
+if(!isset($_SESSION['developerid'])){
+    header("Location:../index.php");
+}
+$devid=$_SESSION['developerid'];
+include "../connection.php";
+$sqli="SELECT * FROM `user` WHERE userID='$devid'";
+$result=mysqli_query($conn,$sqli);
+if (mysqli_num_rows($result)> 0) {
+    $row=mysqli_fetch_assoc($result);
+    $fname=$row['firstName'];
+    $lname=$row['lastName'];
+    $fullname = $fname." ".$lname;
+    $pos=$row['Role'];
+    $email=$row['email'];
+    };
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,7 +25,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css" rel="stylesheet" />
-        
+
         <title>DevTech</title>
         <link rel="stylesheet" href="style.css">
     </head>
@@ -14,7 +34,7 @@
 <!--NavBar Start-->
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    
+
         <a href="client.php"
         class="flex ml-2 md:mr-24 self-center text-2xl font-bold sm:text-2xl whitespace-nowrap dark:text-white">Dev<span
             class="text-red-700">Tech</span></a>
@@ -29,16 +49,10 @@
         <!-- Dropdown menu -->
         <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
           <div class="px-4 py-3">
-            <span class="block text-sm text-gray-900 dark:text-white">Akib Raihan</span>
-            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">akibraihan@gmail.com</span>
+            <span class="block text-sm text-gray-900 dark:text-white"><?php echo $fullname?></span>
+            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400"><?php echo $email?></span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-            </li>
             <li>
               <a href="../index.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
             </li>
@@ -67,6 +81,11 @@
     </div>
 </nav>
 <!--NavBar Exit-->
+
+
+
+
+
 <!--About Section Start-->
 <section class="bg-white dark:bg-gray-900">
     <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
@@ -93,7 +112,7 @@
         <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Our Top Employee</h2>
             <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Among our <span class="text-xl font-bold sm:text-4xl">50+</span> Employee, these are the Top Employee of the Month.</p>
-        </div> 
+        </div>
         <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
             <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
@@ -128,7 +147,7 @@
                         </li>
                     </ul>
                 </div>
-            </div> 
+            </div>
             <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                     <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" src="images/employee4.png" alt="Jese Avatar">
@@ -162,7 +181,7 @@
                         </li>
                     </ul>
                 </div>
-            </div> 
+            </div>
             <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                     <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" src="images/employee2.png">
@@ -196,7 +215,7 @@
                         </li>
                     </ul>
                 </div>
-            </div> 
+            </div>
             <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                     <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" src="images/employee5.png">
@@ -230,15 +249,15 @@
                         </li>
                     </ul>
                 </div>
-            </div>  
-        </div>  
+            </div>
+        </div>
     </div>
   </section>
 
 
 <!--Teams End-->
-  
-    
+
+
 
 
 
@@ -246,7 +265,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
 
 
-    
+
 <footer class="bg-white dark:bg-gray-900">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">

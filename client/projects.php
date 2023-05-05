@@ -1,10 +1,34 @@
+<?php
+session_start();
+if(!isset($_SESSION['developerid'])){
+    header("Location:../index.php");
+}
+$devid=$_SESSION['developerid'];
+include "../connection.php";
+$sqli="SELECT * FROM `user` WHERE userID='$devid'";
+$result=mysqli_query($conn,$sqli);
+if (mysqli_num_rows($result)> 0) {
+    $row=mysqli_fetch_assoc($result);
+    $fname=$row['firstName'];
+    $lname=$row['lastName'];
+    $fullname = $fname." ".$lname;
+    $pos=$row['Role'];
+    $email=$row['email'];
+    };
+?>
+
+<?php
+$sql = "Select * FROM `tproject`";
+$result = mysqli_query($conn,$sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+
   <title>DevTech</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css" rel="stylesheet" />
@@ -16,7 +40,7 @@
 <!--NavBar Start-->
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    
+
         <a href="#"
         class="flex ml-2 md:mr-24 self-center text-2xl font-bold sm:text-2xl whitespace-nowrap dark:text-white">Dev<span
             class="text-red-700">Tech</span></a>
@@ -31,18 +55,12 @@
         <!-- Dropdown menu -->
         <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
           <div class="px-4 py-3">
-            <span class="block text-sm text-gray-900 dark:text-white">Akib Raihan</span>
-            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">akibraihan@gmail.com</span>
+            <span class="block text-sm text-gray-900 dark:text-white"><?php echo $fullname?></span>
+            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400"><?php echo $email?></span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-            </li>
-            <li>
-              <a href="../index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+              <a href="../index.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
             </li>
           </ul>
         </div>
@@ -56,13 +74,13 @@
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
       <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li>
-          <a href="client.html" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a>
+          <a href="client.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a>
         </li>
         <li>
-          <a href="projects.html" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500">View Projects</a>
+          <a href="projects.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500">View Projects</a>
         </li>
         <li>
-          <a href="request.html" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Request Project</a>
+          <a href="request.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Request Project</a>
         </li>
       </ul>
     </div>
@@ -78,78 +96,26 @@
       <p>Here are some of our works that we are proud of.</p>
       <div class="project-grid">
           <!-- project-1-->
-          <div class="proj-item">
-              <div class="proj-img-box">
-                  <img src="images/project-1.jpg" alt="">
-              </div>
-              <div class="proj-img-info">
-                  <h2>View Project</h2>
-                  <a href="https://melodious-hummingbird-7672ee.netlify.app" target="_blank"><i class = "fa-solid fa-arrow-up-right-from-square"></i></a>
-              </div>
-          </div>
-          <!-- project-2-->
-          <div class="proj-item">
-              <div class="proj-img-box">
-                  <img src="images/image.png" alt="">
-              </div>
-              <div class="proj-img-info">
-                  <h2>View Project</h2>
-                  <a href="https://legendary-sundae-6873c3.netlify.app" target="_blank"><i class = "fa-solid fa-arrow-up-right-from-square"></i></a>
-              </div>
-          </div>
+          <?php
+          while($row = mysqli_fetch_assoc($result)){
+            $pname=$row['tprojName'];
+            $projImage=$row['tprojImage'];
+            $projRefer=$row['tprojRef'];
 
-          <!-- Project-3-->
+          ?>
           <div class="proj-item">
               <div class="proj-img-box">
-                  <img src="images/project-3.jpg" alt="">
+                  <img src=<?php echo $projImage ?> alt="">
               </div>
               <div class="proj-img-info">
-                  <h2>View Project</h2>
-                  <a href="https://preeminent-bombolone-3b8fa7.netlify.app" target="_blank"><i class = "fa-solid fa-arrow-up-right-from-square"></i></a>
+                  <h2><?php echo $pname ?></h2>
+                  <a href=<?php echo $projRefer ?> target="_blank"><i class = "fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
           </div>
-
+          <?php } ?>
       </div>
   </div>
 
-
-  <div class="container">
-    
-    <div class="project-grid">
-        <!-- project-1-->
-        <div class="proj-item">
-            <div class="proj-img-box">
-                <img src="images/project-4.jpg" alt="">
-            </div>
-            <div class="proj-img-info">
-                <h2>View Project</h2>
-                <a href="https://melodious-hummingbird-7672ee.netlify.app" target="_blank"><i class = "fa-solid fa-arrow-up-right-from-square"></i></a>
-            </div>
-        </div>
-        <!-- project-2-->
-        <div class="proj-item">
-            <div class="proj-img-box">
-                <img src="images/project-5.jpg" alt="">
-            </div>
-            <div class="proj-img-info">
-                <h2>View Project</h2>
-                <a href="https://legendary-sundae-6873c3.netlify.app" target="_blank"><i class = "fa-solid fa-arrow-up-right-from-square"></i></a>
-            </div>
-        </div>
-
-        <!-- Project-3-->
-        <div class="proj-item">
-            <div class="proj-img-box">
-                <img src="images/project-1.jpg" alt="">
-            </div>
-            <div class="proj-img-info">
-                <h2>View Project</h2>
-                <a href="https://preeminent-bombolone-3b8fa7.netlify.app" target="_blank"><i class = "fa-solid fa-arrow-up-right-from-square"></i></a>
-            </div>
-        </div>
-
-    </div>
-</div>
 </section>
 <!--Projects END -->
 
