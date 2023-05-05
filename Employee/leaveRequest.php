@@ -228,7 +228,7 @@ if (mysqli_num_rows($result)> 0) {
                         <label for="end-date" class="block text-gray-700 font-bold mb-2">End Date</label>
                         <input type="date" id="end-date" name="endDate" class="border rounded-lg p-2 w-full">
                     </div>
-                    <button type="submit" onclick="submitted()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit Request</button>
+                    <button type="submit" onclick="submitted()" class="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded">Submit Request</button>
                 </form>
             </div>
         </div>

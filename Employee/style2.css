@@ -158,3 +158,65 @@
         grid-gap: 30px;
     }
 }
+
+#calendar {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+}
+
+.month {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.weekdays {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.weekdays span {
+  width: calc(100% / 7);
+  text-align: center;
+  font-weight: bold;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.days span {
+  width: calc(100% / 7);
+  text-align: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.today {
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: bold;
+}
+
+.selected {
+  background-color: #007bff;
+  color: #fff;
+}

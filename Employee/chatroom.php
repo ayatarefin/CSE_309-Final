@@ -49,7 +49,7 @@ if (mysqli_num_rows($result)> 0) {
             <img src="image/icons/menu.png" alt="" class="w-8">
           </button>
           <!-- expand button end -->
-          <a href="#"
+          <a href="employee.php"
             class="flex ml-2 md:mr-24 self-center text-2xl font-bold sm:text-2xl whitespace-nowrap dark:text-white">Dev<span
               class="text-red-700">Tech</span></a>
         </div>

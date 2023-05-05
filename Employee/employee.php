@@ -43,7 +43,7 @@ if (mysqli_num_rows($result)> 0) {
                         <img src="image/icons/menu.png" alt="" class="w-8">
                     </button>
                     <!-- expand button end -->
-                    <a href="#"
+                    <a href="employee.php"
                         class="flex ml-2 md:mr-24 self-center text-2xl font-bold sm:text-2xl whitespace-nowrap dark:text-white">Dev<span
                             class="text-red-700">Tech</span></a>
                 </div>
@@ -191,78 +191,59 @@ if (mysqli_num_rows($result)> 0) {
                 <!-- calender -->
 
                 <div class="relative rounded border-pink-600 p-4 shadow-xl sm:p-6 lg:p-8 bg-white flex flex-col justify-between">
-                    <div class="bg-pink-600 text-white py-3 px-4 font-bold text-lg text-center flex flex-col">
-                      April 2023
-                    </div>
-                    <div  class='flex flex-wrap justify-center px-2 bg-gray-100 p-2'>
-                        <div class='flex rounded-lg mx-1 cursor-pointer justify-center w-10'>
-                            <div class='flex items-center px-4 py-4'>
-                                <div class='text-center'>
-                                   <p class='text-gray-900 group-hover:text-gray-100 text-sm transition-all	duration-300'> Sun </p>
-                                   <p class='text-gray-900 group-hover:text-gray-100 mt-3 group-hover:font-bold transition-all	duration-300'> 2 </p>
-                                </div>
-                            </div>
-                        </div>
-                      
-                      <div class='flex rounded-lg mx-1 cursor-pointer justify-center w-10'>
-                            <div class='flex items-center px-4 py-4'>
-                                <div class='text-center'>
-                                   <p class='text-gray-900 group-hover:text-gray-100 text-sm transition-all	duration-300'> Mon </p>
-                                   <p class='text-gray-900 group-hover:text-gray-100 mt-3 group-hover:font-bold transition-all	duration-300'> 3 </p>
-                                </div>
-                            </div>
-                        </div>
-                      
-                      <div class='flex rounded-lg mx-1 cursor-pointer justify-center w-10'>
-                            <div class='flex items-center px-4 py-4'>
-                                <div class='text-center'>
-                                   <p class='text-gray-900 group-hover:text-gray-100 text-sm transition-all	duration-300'> Tue </p>
-                                   <p class='text-gray-900 group-hover:text-gray-100 mt-3 group-hover:font-bold transition-all	duration-300'> 4 </p>
-                                </div>
-                            </div>
-                        </div>
-                      
-                        <div class='flex group bg-purple-400 shadow-lg dark-shadow rounded-lg mx-1 cursor-pointer justify-center relative  w-10'>
-                          <span class="flex h-3 w-3 absolute -top-1 -right-1">
-                            <span class="relative inline-flex rounded-full h-3 w-3 bg-purple-50"></span>
-                          </span>
-                            <div class='flex items-center px-4 py-4'>
-                                <div class='text-center'>
-                                   <p class='text-gray-100 text-sm'> Wed </p>
-                                   <p class='text-gray-100  mt-3 font-bold'> 5 </p>
-                                </div>
-                            </div>
-                        </div>
-                      
-                      <div class='flex rounded-lg mx-1 cursor-pointer justify-center w-10'>
-                            <div class='flex items-center px-4 py-4'>
-                                <div class='text-center'>
-                                   <p class='text-gray-900 group-hover:text-gray-100 text-sm transition-all	duration-300'> Thu </p>
-                                   <p class='text-gray-900 group-hover:text-gray-100 mt-3 group-hover:font-bold transition-all	duration-300'> 6 </p>
-                                </div>
-                            </div>
-                        </div>
-                      
-                      <div class='flex rounded-lg mx-1 cursor-pointer justify-center w-10'>
-                            <div class='flex items-center px-4 py-4'>
-                                <div class='text-center'>
-                                   <p class='text-gray-900 group-hover:text-gray-100 text-sm transition-all	duration-300'> Fri </p>
-                                   <p class='text-gray-900 group-hover:text-gray-100 mt-3 group-hover:font-bold transition-all	duration-300'> 7 </p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                      <div class='flex rounded-lg mx-1 cursor-pointer justify-center w-10'>
-                            <div class='flex items-center px-4 py-4'>
-                                <div class='text-center'>
-                                   <p class='text-gray-900 group-hover:text-gray-100 text-sm transition-all	duration-300'> Sat </p>
-                                   <p class='text-gray-900 group-hover:text-gray-100 mt-3 group-hover:font-bold transition-all	duration-300'> 8 </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                  
+  <div id="monthHeading" class="bg-red-700 text-white py-3 px-4 font-bold text-lg text-center flex flex-col"></div>
+  <div id="weekDates" class='flex flex-wrap justify-center px-2 bg-gray-100 p-2'></div>
+</div>
+
+<script>
+  // Get current date
+  let today = new Date();
+
+  // Calculate first day of the current week
+  let firstDayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
+  let ajke = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+  // Get the month name and year of the first day of the current week
+  let monthName = ajke.toLocaleString('default', { month: 'long' });
+  let year = ajke.getFullYear();
+
+  // Update the month heading
+  document.getElementById("monthHeading").innerHTML = `${monthName} ${year}`;
+
+  // Create a row for the dates of the current week
+  let weekDatesRow = document.createElement("div");
+  weekDatesRow.classList.add("flex", "flex-wrap", "justify-center", "px-2", "bg-gray-100", "p-2");
+
+  // Loop through the dates of the current week and create a div for each date
+  for (let i = 0; i < 7; i++) {
+    let date = new Date(firstDayOfWeek);
+    date.setDate(date.getDate() + i);
+
+    let dateDiv = document.createElement("div");
+    dateDiv.classList.add("flex", "rounded-lg", "mx-1", "cursor-pointer", "justify-center", "w-10");
+
+    // Highlight today's date
+    if (date.toDateString() === today.toDateString()) {
+      dateDiv.classList.add("group", "bg-red-400", "shadow-lg", "dark-shadow", "rounded-lg");
+    }
+
+    let dateContent = `
+      <div class='flex items-center px-4 py-4'>
+        <div class='text-center'>
+          <p class='text-gray-900 group-hover:text-gray-100 text-sm transition-all	duration-300'> ${date.toLocaleDateString('default', { weekday: 'short' })} </p>
+          <p class='text-gray-900 group-hover:text-gray-100 mt-3 group-hover:font-bold transition-all	duration-300'> ${date.getDate()} </p>
+        </div>
+      </div>
+    `;
+
+    dateDiv.innerHTML = dateContent;
+    weekDatesRow.appendChild(dateDiv);
+  }
+
+  // Add the week dates row to the calendar
+  document.getElementById("weekDates").appendChild(weekDatesRow);
+</script>
+
                   <!-- feedback -->
 
                   <a href="#">

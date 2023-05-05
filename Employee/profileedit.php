@@ -14,11 +14,62 @@ if (mysqli_num_rows($result)> 0) {
     $row=mysqli_fetch_assoc($result);
     $fname=$row['firstName'];
     $lname=$row['lastName'];
-    $fullname=$fullname. $fname." ".$lname;
+    $fullname=$fname." ".$lname;
     $pos=$row['Role'];
     $email=$row['email'];
     $phone=$row['phoneNumber'];
+    $pass=$row['password'];
     };
+?>
+<?php
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+        if(isset($_POST['firstName']))
+        {
+            $firstName=$_POST['firstName'];
+        }
+        else
+        {
+            $firstName = $fname;
+        }
+        if(isset($_POST['surname']))
+        {
+            $lastName=$_POST['surName'];
+        }
+        else
+        {
+            $lastName = $lname;
+        }
+        if(isset($_POST['emailAddress']))
+        {
+            $emailAddress=$_POST['emailAddress'];
+        }
+        else
+        {
+            $emailAddress = $email;
+        }
+        if(isset($_POST['mobileNumber']))
+        {
+            $mobileNumber=$_POST['mobileNumber'];
+        }
+        else
+        {
+            $mobileNumber = $phone;
+        }
+        if(isset($_POST['currentPassword']))
+        {
+            $currentPassword=$_POST['currentPassword'];
+        }
+        if(isset($_POST['newPassword']))
+        {
+            $newPassword=$_POST['newPassword'];
+        }
+        
+
+        $sql= "UPDATE `user` SET `password`='$newPassword', `firstName`='$firstName', `lastName`='$lastName', `email`='$emailAddress', `phoneNumber`='$mobileNumber' WHERE `userID`='$devid' AND `password` = '$pass'";
+        $conn->query($sql);
+        mysqli_close($conn);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -170,41 +221,45 @@ if (mysqli_num_rows($result)> 0) {
 
     
       <!-- Profile edit -->
-      <div class="container rounded bg-white mt-5 mb-5 common2">
-        <div class="row">
-            <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="employee/employee1.png"><span class="font-weight-bold"><?php echo $fullname?></span><span class="text-black-50"><?php echo $email?></span><span> </span></div>
+      <div class="container rounded bg-white mb-5 common2" >
+        
+            <form action="" method="POST">
+            <div class="col-md-3 border-right" style="margin-left: 40%">
+                <div class="d-flex flex-column align-items-center text-center p-3">
+                    <img class="rounded-circle mt-5" width="150px" src="employee/employee1.png">
+                    <br>
+                    <h6 class="font-weight-bold"><?php echo $fullname?></h6>
+                    <h6 class="text-black-50"><?php echo $email?></h6></h6>
+                </div>
             </div>
-            <div class="col-md-5 border-right">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Profile Settings</h4>
+            <div class="col-md-5 border-right" style="margin-left: 33%">
+                <div class="p-3">
+                    <div class="mb-3">
+                        <h4 class=""><b>Profile Settings</b></h4>
                     </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder=<?php echo $fname?> value=""></div>
-                        <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder=<?php echo $lname?>></div>
+                    <div class="row">
+                        <div class="col-md-6"><label class="labels" >Name</label><input type="text" name="firstName" id="firstName" class="form-control" value="<?php echo $fname?>"></div>
+                        <div class="col-md-6"><label class="labels" >Surname</label><input type="text" name="surName" id="surName" class="form-control" value=<?php echo $lname?>></div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder=<?php echo $phone?> value=""></div>
-                        <!-- <div class="col-md-12"><label class="labels">Permanent Address</label><input type="text" class="form-control" placeholder="enter permanent address" value=""></div>
-                        <div class="col-md-12"><label class="labels">Current Address</label><input type="text" class="form-control" placeholder="enter current address" value=""></div> -->
-                        <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                    </div>
-                    <!-- <div class="row mt-3">
-                        <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                        <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
-                    </div> -->
+                    <br>
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" name="mobileNumber" id="mobileNumber" class="form-control" value=<?php echo $phone?>></div>
+                    <br>
+                    <div class="col-md-12"><label class="labels" >Email ID</label><input type="text" name="emailAddress" id="emailAddress" class="form-control" value=<?php echo $email?>></div>
+                    <br>
+                    <h4 class=""><b>Privacy & Security</b></h4>
+                    <br>
+                    <p class="text-red-600"><b>If you will not be changing your password, please enter the same password twice.</b></p>
+                    <br>
+                    <div class="col-md-12"><label class="labels">Current Password</label><input required type="text" name="currentPassword" id="currentPassword" class="form-control" placeholder="Current Password" value="" id=></div>
+                    <br>
+                    <div class="col-md-12"><label class="labels">New Password</label><input required type="text" name="newPassword" id="newPassword" class="form-control" placeholder="New Password" value=""></div>
+                    <br>
+                    <button type ="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-400 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-blue-800" type="button" style="margin-left: 40%">Save</span></button>
+                </div> 
                     <!-- <div class="mt-5 text-center"><button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button"> <a href="employee.html">Save Profile</a></button></div> -->
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center experience"><span>Privacy and Security</span><button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button">Save</span></button></div><br>
-                    <div class="col-md-12"><label class="labels">Current Password</label><input type="text" class="form-control" placeholder="" value=""></div>
-                    <div class="col-md-12"><label class="labels">New Password</label><input type="text" class="form-control" placeholder="" value=""></div>
-                    <div class="col-md-12"><label class="labels">Confirm New Password</label><input type="text" class="form-control" placeholder="" value=""></div>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
