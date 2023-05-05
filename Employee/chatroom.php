@@ -14,7 +14,7 @@ if (mysqli_num_rows($result)> 0) {
     $row=mysqli_fetch_assoc($result);
     $fname=$row['firstName'];
     $lname=$row['lastName'];
-    $fullname=$fullname. $fname." ".$lname;
+    $fullname=$fname." ".$lname;
     $pos=$row['Role'];
     $email=$row['email'];
     };
@@ -381,7 +381,7 @@ if (mysqli_num_rows($result)> 0) {
           <div class="h-20 w-20 rounded-full border overflow-hidden">
             <img src="employee/employee1.png" alt="Avatar" class="h-full w-full" />
           </div>
-          <div class="text-sm font-semibold mt-2">Fahad Zaman Chowdhury</div>
+          <div class="text-sm font-semibold mt-2"><?php echo $fullname ?></div>
           <div class="text-xs text-gray-500">Senior Developer</div>
           <div class="flex flex-row items-center mt-3">
             <div class="flex flex-col justify-center h-4 w-8 bg-indigo-500 rounded-full">
