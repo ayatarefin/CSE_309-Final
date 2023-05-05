@@ -115,8 +115,9 @@ if (mysqli_num_rows($result) > 0) {
         <div class="inputgroup" style="margin-bottom:0px;">
           <textarea class="texiArea" name="message" id="message" rows="8" required></textarea>
           <label class="labela" for="message"><i class="fa-solid fa-clipboard"></i> Project Requirements (Summary)</label>
-
+          
         </div>
+        <h4>Deadline: <input type="date" id="Test_DatetimeLocal" name="deadline"></h4>
         <div class="inputgroup">
           <input class="uplo" type="file" name="upFile" accept=".docx,.doc">
         </div>
@@ -233,6 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $message = $_POST['message'];
   $filename = $_FILES['upFile']['name'];
   $tmpname = $_FILES['upFile']['tmp_name'];
+  $deadline = $_POST['deadline'];
 
   // Step 3: Check if the uploaded file is a DOC or DOCX file
   $ext = pathinfo($filename, PATHINFO_EXTENSION);
@@ -250,7 +252,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
   // // Step 5: Insert form data and file path into the ClientProjectReq table
-  $stmt = "INSERT INTO `clientprojectreq`(`id`, `name`, `budget`, `email`, `message`, `filepath`) VALUES ('','$username','$budget','$email','$message','$filepath')";
+ 
+  $stmt = "INSERT INTO `clientprojectreq`(`id`, `name`, `budget`, `email`, `message`, `filepath`, `clientID`, `deadline`) VALUES ('','$username','$budget','$email','$message','$filepath','$devid','$deadline')";
   if ($conn->query($stmt) === TRUE) {
     echo "<script>alert('Project Request has been submitted successfully')</script>";
   } else {
