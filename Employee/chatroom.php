@@ -382,7 +382,7 @@ if (mysqli_num_rows($result)> 0) {
             <img src="employee/employee1.png" alt="Avatar" class="h-full w-full" />
           </div>
           <div class="text-sm font-semibold mt-2"><?php echo $fullname ?></div>
-          <div class="text-xs text-gray-500">Senior Developer</div>
+          <div class="text-xs text-gray-500"><?php echo $pos ?></div>
           <div class="flex flex-row items-center mt-3">
             <div class="flex flex-col justify-center h-4 w-8 bg-indigo-500 rounded-full">
               <div class="h-3 w-3 bg-white rounded-full self-end mr-1"></div>
