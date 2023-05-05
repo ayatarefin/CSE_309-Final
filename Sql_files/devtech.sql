@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2023 at 03:25 AM
+-- Generation Time: May 05, 2023 at 05:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -76,15 +76,18 @@ CREATE TABLE `clientprojectreq` (
   `budget` int(11) NOT NULL,
   `email` varchar(40) NOT NULL,
   `message` text NOT NULL,
-  `filepath` varchar(255) NOT NULL
+  `filepath` varchar(255) NOT NULL,
+  `clientID` int(7) NOT NULL,
+  `deadline` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `clientprojectreq`
 --
 
-INSERT INTO `clientprojectreq` (`id`, `name`, `budget`, `email`, `message`, `filepath`) VALUES
-(0, 'KishorAlo', 10000, 'ka@gmail.com', 'kisu na', '');
+INSERT INTO `clientprojectreq` (`id`, `name`, `budget`, `email`, `message`, `filepath`, `clientID`, `deadline`) VALUES
+(6, 'DhakauniProject', 1200, 'ayatullaharefin@gmail.com', 'chetona', '', 1234567, '2023-07-11'),
+(7, 'MetroRail', 10000, 'bd@gmail.com', 'mirpur', '', 1234567, '2023-07-19');
 
 -- --------------------------------------------------------
 
@@ -102,6 +105,8 @@ CREATE TABLE `client_project` (
 --
 
 INSERT INTO `client_project` (`clientID`, `projectID`) VALUES
+(1234567, 4),
+(1234567, 8),
 (1234567, 12345696),
 (1598742, 12345695),
 (2021397, 12345678),
@@ -141,11 +146,11 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`empID`, `designation`, `joiningDate`, `salary`, `status`) VALUES
-(2020367, 'Developer', '2023-05-01', 50000, 'Active'),
+(2020367, 'Developer', '2023-05-01', 50000, 'On leave'),
 (2021591, 'Developer', '2023-05-01', 60000, 'Active'),
 (2022351, 'System Analyst', '2022-05-01', 32000, 'Active'),
 (2022352, 'Developer', '2022-05-02', 35500, 'Active'),
-(2022353, 'Developer', '2023-04-03', 45000, 'Active'),
+(2022353, 'Developer', '2023-04-03', 45000, 'On leave'),
 (2022354, 'System Analyst', '2022-05-03', 34000, 'Active'),
 (2022355, 'System Analyst', '2023-05-05', 30000, 'Active'),
 (2022356, 'System Analyst', '2023-05-15', 29000, 'Active'),
@@ -174,6 +179,8 @@ INSERT INTO `employee_project` (`empID`, `projectID`, `taskStatus`) VALUES
 (2020367, 12345684, 'Completed'),
 (2020367, 12345688, 'Yet to start'),
 (2020367, 12345691, 'Completed'),
+(2020367, 12345692, 'On going'),
+(2021591, 12345679, 'On going'),
 (2021591, 12345685, 'Completed'),
 (2021591, 12345690, 'Designing'),
 (2021591, 12345692, 'Completed'),
@@ -186,10 +193,15 @@ INSERT INTO `employee_project` (`empID`, `projectID`, `taskStatus`) VALUES
 (2022353, 12345689, 'Developing'),
 (2022353, 12345694, 'Completed'),
 (2022354, 12345683, 'Analysing'),
+(2022354, 12345692, 'On going'),
+(2022355, 12345678, 'On going'),
 (2022355, 12345695, 'On going'),
 (2022355, 12345696, 'On going'),
 (2022356, 12345686, 'Analysing'),
-(2022357, 12345687, 'Designing');
+(2022357, 12345687, 'Designing'),
+(2022359, 12345692, 'Completed'),
+(2022360, 12345678, 'On going'),
+(2022360, 12345679, 'Completed');
 
 -- --------------------------------------------------------
 
@@ -210,20 +222,9 @@ CREATE TABLE `leaveapplication` (
 --
 
 INSERT INTO `leaveapplication` (`leaveID`, `empID`, `startDate`, `endDate`, `leaveType`) VALUES
-(123456, 2020367, '2023-05-05', '2023-05-07', 'Personal'),
-(123457, 2022354, '2023-04-23', '2023-04-03', 'Personal'),
-(123458, 2022360, '2023-05-04', '2023-05-10', 'Pesonal'),
-(123459, 2022352, '2023-04-27', '2023-04-30', 'Sick Leave'),
-(123460, 2022356, '2023-06-30', '2024-03-31', 'Sick Leave'),
-(123461, 2022353, '2023-05-24', '2023-05-31', 'vacation'),
-(123462, 2022353, '2023-05-16', '2023-05-31', 'vacation'),
-(123463, 2022353, '2023-05-09', '2023-05-29', 'personal'),
-(123464, 2022353, '2023-05-12', '2023-05-19', 'sick'),
-(123465, 2022353, '2023-05-31', '2023-06-30', 'sick'),
-(123466, 2022352, '2023-05-19', '2023-05-31', 'vacation'),
-(123467, 2022352, '2023-05-31', '2023-06-30', 'sick'),
-(123468, 2022352, '2023-05-31', '2023-06-30', 'sick'),
-(123469, 2022352, '2023-05-31', '2023-06-30', 'sick');
+(123450, 2022352, '2023-05-19', '2023-05-24', 'Sick'),
+(123457, 2022360, '2023-05-02', '2023-05-18', 'Personal'),
+(123459, 2022351, '2023-05-02', '2023-05-16', 'Vacation');
 
 -- --------------------------------------------------------
 
@@ -235,7 +236,7 @@ CREATE TABLE `project` (
   `projectID` int(8) NOT NULL,
   `projectName` varchar(50) NOT NULL,
   `projectOverview` varchar(10000) NOT NULL,
-  `startingDate` date DEFAULT NULL,
+  `startingDate` date DEFAULT current_timestamp(),
   `deadline` date NOT NULL,
   `budget` double NOT NULL,
   `projectStatus` varchar(20) NOT NULL
@@ -246,6 +247,8 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`projectID`, `projectName`, `projectOverview`, `startingDate`, `deadline`, `budget`, `projectStatus`) VALUES
+(4, 'SMC', 'Something', '2023-05-05', '2023-05-26', 1500, 'Yet to start'),
+(8, 'PadmaBridge', 'Shopner Padma Shetu', '2023-05-05', '2023-07-27', 199999, 'Yet to start'),
 (12345678, 'SPMS', 'In this system IUB students can see their grades, the CLOs they have completed, the mapping of CLOs with PLOs. Faculty can upload grade-sheet and CLO achieved by the students.', '2023-05-01', '2023-05-31', 1000, 'On going'),
 (12345679, 'AlumniIUB', 'As we live, our hearts turn colder. Cause pain is what we go through as we become older. We get insulted by others, lose trust for those others. We get back stabbed by friends. It becomes harder for us to give others a hand. We get our heart broken by people we love, even that we give them all', '2023-03-30', '2023-06-30', 1500, 'On going'),
 (12345680, 'E-commerce Website', 'analyzing product performance metrics, and developing recommendations to improve online sales', '2023-05-01', '2023-11-01', 50000, 'Developing'),
@@ -284,6 +287,31 @@ CREATE TABLE `project_manager` (
 
 INSERT INTO `project_manager` (`managerID`, `joiningDate`, `salary`) VALUES
 (2021591, '2023-03-22', 100000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tproject`
+--
+
+CREATE TABLE `tproject` (
+  `tprojID` int(11) NOT NULL,
+  `tprojName` varchar(35) NOT NULL,
+  `tprojImage` varchar(255) NOT NULL,
+  `tprojRef` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tproject`
+--
+
+INSERT INTO `tproject` (`tprojID`, `tprojName`, `tprojImage`, `tprojRef`) VALUES
+(1, 'Meal Api', 'images/image.png', 'https://melodious-hummingbird-7672ee.netlify.app'),
+(2, 'Cycle News', 'images/project-3.jpg', 'https://www.cyclingnews.com'),
+(3, 'Meal Course', 'images/project-4.jpg', 'https://legendary-sundae-6873c3.netlify.app'),
+(4, 'Office System', 'images/project-6.jpg', 'https://legendary-sundae-6873c3.netlify.app'),
+(5, 'Covid-19 Project', 'images/project-5.jpg', 'http://www.dskbangladesh.org/covid-19-projects'),
+(6, 'Overwatch Game', 'images/project-2.png', 'https://preeminent-bombolone-3b8fa7.netlify.app');
 
 -- --------------------------------------------------------
 
@@ -357,6 +385,13 @@ ALTER TABLE `client`
   ADD KEY `clientID` (`clientID`);
 
 --
+-- Indexes for table `clientprojectreq`
+--
+ALTER TABLE `clientprojectreq`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `clientID` (`clientID`);
+
+--
 -- Indexes for table `client_project`
 --
 ALTER TABLE `client_project`
@@ -396,6 +431,12 @@ ALTER TABLE `project_manager`
   ADD PRIMARY KEY (`managerID`);
 
 --
+-- Indexes for table `tproject`
+--
+ALTER TABLE `tproject`
+  ADD PRIMARY KEY (`tprojID`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -408,10 +449,22 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `clientprojectreq`
+--
+ALTER TABLE `clientprojectreq`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `leaveapplication`
 --
 ALTER TABLE `leaveapplication`
-  MODIFY `leaveID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123470;
+  MODIFY `leaveID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123475;
+
+--
+-- AUTO_INCREMENT for table `tproject`
+--
+ALTER TABLE `tproject`
+  MODIFY `tprojID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -422,6 +475,12 @@ ALTER TABLE `leaveapplication`
 --
 ALTER TABLE `client`
   ADD CONSTRAINT `client_ibfk_1` FOREIGN KEY (`clientID`) REFERENCES `user` (`userID`);
+
+--
+-- Constraints for table `clientprojectreq`
+--
+ALTER TABLE `clientprojectreq`
+  ADD CONSTRAINT `clientprojectreq_ibfk_1` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`);
 
 --
 -- Constraints for table `client_project`
