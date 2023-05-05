@@ -39,10 +39,8 @@ html{
 }
 
 #project .project-grid{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 70px;
-
+    display: grid;
+    grid-template-columns: auto auto auto;
 }
 
 #project .project-grid .proj-item{
@@ -50,6 +48,7 @@ html{
     border-radius: 15px;
     flex: 1;
     padding: 0 20px;
+    margin-top: 5%;
 }
 
 #project .project-grid .proj-item .proj-img-box img{
@@ -82,7 +81,7 @@ html{
 }
 
 #project .project-grid .proj-item .proj-img-info h2{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS' sans-serif;
     font-size: 30px;
     font-weight: 600;
     color: white;
@@ -104,10 +103,3 @@ html{
         margin-top: 3%;
     }
 }
-
-
-
-
-
-
-

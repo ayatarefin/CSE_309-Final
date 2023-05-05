@@ -13,7 +13,7 @@
         <?php
         include "../connection.php";
         session_start();
-        $userID = $_SESSION['userID'];
+        $userID = $_SESSION['developerid'];
         $sql = "SELECT * FROM user Where userID=$userID;";
         $result = mysqli_query($conn, $sql);
         $user = mysqli_fetch_assoc($result);
